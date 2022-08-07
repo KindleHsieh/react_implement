@@ -6,7 +6,7 @@ const path = require('path');
 module.exports = {
   target: 'web',
   // 入口
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   // 模式 development
   mode: 'development',
   // 出口
@@ -36,14 +36,22 @@ module.exports = {
         test: /\.gif/,
         type: 'asset/resource'
       },
+      // {
+      //   test: /\.m?js$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: "babel-loader",
+      //   }
+      // },
       {
-        test: /\.m?js$/,
+        test: /\.tsx?$/,
+        use: 'ts-loader',
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        }
       }
     ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   // 插件
   plugins: [
@@ -56,5 +64,5 @@ module.exports = {
     new CompressionPlugin()
   ],
 
-  devtool: 'source-map'
+  devtool: 'inline-source-map'
 }
